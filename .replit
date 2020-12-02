@@ -1,2 +1,2 @@
 language = "javascript"
-run = ""
+run = "node 2020/**.js"
