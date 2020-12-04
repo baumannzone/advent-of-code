@@ -1005,30 +1005,16 @@ function parseInput1(inputText) {
     .split('\n')
     .map(text => {
       const [marginText, letterText, password] = text.split(' ')
-      const [min, max] = marginText
-        .split('-')
-        .map(n => parseInt(n))
+      const [min, max] = marginText.split('-').map(n => parseInt(n))
       const letter = letterText[0]
-      return {
-        letter,
-        min,
-        max,
-        password,
-      }
+      return { letter, min, max, password }
     })
 }
 
-<<<<<<< HEAD
-function puzzle1(passwordSpecs) {
-=======
-function resolve1(passwordSpecs) {
->>>>>>> a03af36... Day 3
+const puzzle1 = (passwordSpecs) => {
   return passwordSpecs
     .filter(({ min, max, letter, password }) => {
-      const occurrences = password
-        .split('')
-        .filter(l => letter === l)
-        .length
+      const occurrences = password.split('').filter(l => letter === l).length
       return min <= occurrences && occurrences <= max
     })
     .length
@@ -1039,22 +1025,14 @@ function parseInput2(inputText) {
     .trim()
     .split('\n')
     .map(text => {
-<<<<<<< HEAD
       const [marginText, letterText, password] = text.split(' ')
-      const [contain1, contain2] = marginText
-        .split('-')
-        .map(n => parseInt(n))
+      const [contain1, contain2] = marginText.split('-').map(n => parseInt(n))
       const letter = letterText[0]
-      return {
-        letter,
-        contain1: contain1 - 1,
-        contain2: contain2 - 1,
-        password,
-      }
+      return { letter, contain1: contain1 - 1, contain2: contain2 - 1, password }
     })
 }
 
-function puzzle2(passwordSpecs) {
+const puzzle2 = (passwordSpecs) => {
   return passwordSpecs
     .filter(({ contain1, contain2, letter, password }) => {
       if (password[contain1] === letter && password[contain2] === letter) return false
@@ -1063,38 +1041,11 @@ function puzzle2(passwordSpecs) {
     .length
 }
 
+
 const res1 = puzzle1(parseInput1(input))
 const res2 = puzzle2(parseInput2(input))
 
 console.log(res1)
 console.log(res2)
-=======
-      const [marginText, letterText, password] = text.split(' ');
-      const [contain1, contain2] = marginText
-        .split('-')
-        .map(n => parseInt(n));
-      const letter = letterText[0];
-      return {
-        letter,
-        contain1: contain1 - 1, // offset
-        contain2: contain2 - 1,
-        password,
-      };
-    });
-}
 
-function resolve2(passwordSpecs) {
-  return passwordSpecs
-    .filter(({contain1, contain2, letter, password}) => {
-      if (password[contain1] === letter && password[contain2] === letter) return false;
-      return password[contain1] === letter || password[contain2] === letter;
-    })
-    .length;
-}
 
-const texto = parseInput2(input);
-const output = resolve2(texto);
-
-console.log('<<<output>>>')
-console.log(output)
->>>>>>> a03af36... Day 3
