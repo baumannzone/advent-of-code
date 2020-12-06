@@ -2179,14 +2179,27 @@ uvxym`
 
 const parsed = input.split('\n\n')
 
-const groups = parsed.map(group => {
-  return group.split('\n')
-})
-
 const puzzle1 = () => {
- return groups.reduce((acc, val) => {
-    return acc += new Set(val.join('').split('')).size
-  }, 0)
+  return parsed
+    .map(group => group.split('\n'))
+    .reduce((acc, val) => {
+      return acc + new Set(val.join('').split('')).size
+    }, 0)
+}
+
+const puzzle2 = () => {
+  const groups = parsed.map((group) => {
+    return group
+      .split('\n')
+      .map((answer) => answer.split(''))
+      .reduce((acc, val) => {
+        return acc.filter(i => val.includes(i))
+      })
+      .length
+  })
+  // Sum array
+  return groups.reduce((acc, val) => acc + val, 0)
 }
 
 console.log(puzzle1())
+console.log(puzzle2())
