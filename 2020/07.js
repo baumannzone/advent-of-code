@@ -594,7 +594,7 @@ dim gold bags contain 2 drab brown bags, 3 mirrored brown bags.
 dull lime bags contain 1 dark teal bag.`
 const parsed = input.split('\n')
 
-function inputToMap(input) {
+const inputToMap = (input) => {
   return input.reduce((map, line) => {
     const [left, right] = line.split(' contain ')
     const bag = left.split(' ').slice(0, -1).join(' ')
@@ -612,7 +612,7 @@ function inputToMap(input) {
   }, {})
 }
 
-function hasBag(map, outerBag, innerBag) {
+const hasBag = (map, outerBag, innerBag) => {
   if (map[outerBag][innerBag]) {
     return true
   }
@@ -622,13 +622,13 @@ function hasBag(map, outerBag, innerBag) {
   }, false)
 }
 
-function numBags(map, bag) {
+const numBags = (map, bag) => {
   return Object.keys(map[bag]).reduce((acc, key) => {
     return acc + map[bag][key] * (1 + numBags(map, key))
   }, 0)
 }
 
-function solve1(input) {
+const puzzle1 = (input) => {
   const map = inputToMap(input)
 
   const count = Object.keys(map).reduce((count, key) => {
@@ -637,12 +637,12 @@ function solve1(input) {
   console.log(count)
 }
 
-function solve2(input) {
+const puzzle2 = (input) => {
   const map = inputToMap(input)
 
   console.log(numBags(map, 'shiny gold'))
 }
 
 
-console.log(solve1(parsed))
-console.log(solve2(parsed))
+console.log(puzzle1(parsed))
+console.log(puzzle2(parsed))
